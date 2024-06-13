@@ -1,4 +1,4 @@
 package ch.noseryoung.backend_team7.domain.user;
 
-public class UserRepository {
+public interface UserRepository {
 }
