@@ -1,4 +1,6 @@
 package ch.noseryoung.backend_team7.domain.authority;
 
-public interface AuthorityRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AuthorityRepository extends JpaRepository<Authority, Integer> {
 }
