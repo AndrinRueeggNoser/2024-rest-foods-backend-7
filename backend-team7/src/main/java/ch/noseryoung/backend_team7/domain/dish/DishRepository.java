@@ -1,4 +1,8 @@
 package ch.noseryoung.backend_team7.domain.dish;
 
-public class DishRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface DishRepository extends JpaRepository <Dish, Integer> {
 }
