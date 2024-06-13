@@ -19,4 +19,9 @@ public class DishService {
     public Dish addDish(Dish newDish){
         return dishRepository.save(newDish);
     }
+
+    public Dish updateById(int dishId, Dish dish){
+        dish.setDishId(dishId);
+        return dishRepository.save(dish);
+    }
 }

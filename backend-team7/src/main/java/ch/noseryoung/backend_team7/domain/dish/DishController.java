@@ -3,7 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -22,6 +22,11 @@ public class DishController {
     @ResponseStatus(HttpStatus.CREATED)
     public Dish createDish(@RequestBody Dish newDish){
         return dishService.addDish(newDish);
+    }
+
+    @PutMapping(value = "/{dishId}")
+    public Dish updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish){
+        return dishService.updateById(dishId, dish);
     }
 
 
