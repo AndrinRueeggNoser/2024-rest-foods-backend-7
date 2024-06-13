@@ -12,7 +12,7 @@ public class Authority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "authority_id")
-    private Integer authorityId;
+    private int authorityId;
 
     @Column(name = "authority_name")
     private String authorityName;
