@@ -40,4 +40,7 @@ public class Dish {
         this.region = region;
         this.price = price;
     }
+    public Dish(){
+
+    }
 }
