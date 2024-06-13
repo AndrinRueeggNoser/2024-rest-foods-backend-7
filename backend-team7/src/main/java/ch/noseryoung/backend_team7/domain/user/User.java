@@ -1,5 +1,6 @@
 package ch.noseryoung.backend_team7.domain.user;
 
+import ch.noseryoung.backend_team7.domain.role.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,5 +26,9 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "id_role", referencedColumnName = "role_id")
+    private Role userRole;
 
 }
