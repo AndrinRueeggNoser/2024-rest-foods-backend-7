@@ -1,6 +1,5 @@
 package ch.noseryoung.backend_team7.domain.role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
