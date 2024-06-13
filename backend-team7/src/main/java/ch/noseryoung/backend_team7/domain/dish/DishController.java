@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dishes")
+@RequestMapping("/dish")
 public class DishController {
     @Autowired DishService dishService;
 
@@ -17,6 +17,8 @@ public class DishController {
     public List<Dish> getAllDishes(){
         return dishService.getAllDishes();
     }
+
+
 
 
 }
