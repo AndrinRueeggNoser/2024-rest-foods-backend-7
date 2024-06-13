@@ -1,4 +1,4 @@
 package ch.noseryoung.backend_team7.domain.dish;
 
-public class DishRepository {
+public interface DishRepository {
 }
