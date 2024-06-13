@@ -22,7 +22,7 @@ public class Role {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "rank_roles_authorities",
+            name = "role_authorities",
             joinColumns = {
                     @JoinColumn(name = "id_role", referencedColumnName = "role_id"),
             },
