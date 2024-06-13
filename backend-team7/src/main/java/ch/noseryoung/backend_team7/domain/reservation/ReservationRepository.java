@@ -1,4 +1,6 @@
 package ch.noseryoung.backend_team7.domain.reservation;
 
-public interface ReservationRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 }
