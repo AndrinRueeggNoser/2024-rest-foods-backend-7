@@ -20,8 +20,8 @@ public class Dish {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "ingredients")
-    private String ingredients;
+    @Column(name = "image")
+    private String image;
 
     @Column(name = "is_chefs_choice")
     private boolean isChefsChoice;
@@ -32,11 +32,11 @@ public class Dish {
     @Column(name = "price")
     private Double price;
 
-    public Dish(int dishId, String dishName, String description, String ingredients, String region, Double price) {
+    public Dish(int dishId, String dishName, String description, String image, String region, Double price) {
         this.dishId = dishId;
         this.dishName = dishName;
         this.description = description;
-        this.ingredients = ingredients;
+        this.image = image;
         this.region = region;
         this.price = price;
     }
