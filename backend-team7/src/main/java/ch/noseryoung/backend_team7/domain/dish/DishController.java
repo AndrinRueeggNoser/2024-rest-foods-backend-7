@@ -16,27 +16,32 @@ public class DishController {
     DishService dishService;
 
     // Implement Swagger! @Operation
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public List<Dish> getAllDishes() {
         return dishService.getAllDishes();
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/{Id}")
     public ResponseEntity<Dish> getById(@PathVariable("Id") int id) {
         return ResponseEntity.ok().body(dishService.getById(id));
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Dish createDish(@RequestBody Dish newDish) {
         return dishService.addDish(newDish);
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping(value = "/{dishId}")
     public Dish updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish) {
         return dishService.updateById(dishId, dish);
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping("{Id}")
     public String deleteRank(@PathVariable("Id") int id) {
         dishService.deleteDish(id);
