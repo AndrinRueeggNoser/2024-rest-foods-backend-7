@@ -20,8 +20,8 @@ public class DishService {
         return dishRepository.findAll();
     }
 
-    public Dish getById(int id) {
-        return dishRepository.findById(id).orElseThrow(() -> new NoSuchElementException("GET: Dish with id " + id + " could not be found."));
+    public Dish getById(int dishId) {
+        return dishRepository.findById(dishId).orElseThrow(() -> new NoSuchElementException("GET: Dish with id " + dishId + " could not be found."));
     }
 
     public Dish addDish(Dish newDish) {
@@ -31,5 +31,9 @@ public class DishService {
     public Dish updateById(int dishId, Dish dish) {
         dish.setDishId(dishId);
         return dishRepository.save(dish);
+    }
+
+    public void deleteDish(int id) {
+        dishRepository.deleteById(id);
     }
 }

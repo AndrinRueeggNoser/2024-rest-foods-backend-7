@@ -37,6 +37,12 @@ public class DishController {
         return dishService.updateById(dishId, dish);
     }
 
+    @DeleteMapping("{Id}")
+    public String deleteRank(@PathVariable("Id") int id) {
+        dishService.deleteDish(id);
+        return "Dish with id " + id + " was successfully deleted.";
+    }
+
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException nsee) {
         return ResponseEntity.status(404).body(nsee.getMessage());
