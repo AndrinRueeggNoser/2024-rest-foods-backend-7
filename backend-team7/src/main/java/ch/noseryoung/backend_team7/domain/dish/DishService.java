@@ -24,7 +24,6 @@ public class DishService {
         return dishRepository.findById(id).orElseThrow(() -> new NoSuchElementException("GET: Dish with id " + id + " could not be found."));
     }
 
-
     public Dish addDish(Dish newDish) {
         return dishRepository.save(newDish);
     }
