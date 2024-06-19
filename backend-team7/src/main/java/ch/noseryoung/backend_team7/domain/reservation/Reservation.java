@@ -3,21 +3,22 @@ package ch.noseryoung.backend_team7.domain.reservation;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import ch.noseryoung.backend_team7.domain.table.RestaurantTable;
 
 @Setter
 @Getter
 @Entity
-@Table(name="reservation")
+@Table(name = "reservation")
 public class Reservation {
     @Id
-    @Column(name="reservation_id")
+    @Column(name = "reservation_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationId;
 
-    @Column(name="table_no")
+    @Column(name = "table_no")
     private int tableNo;
 
-    @Column(name ="table_is_available")
+    @Column(name = "table_is_available")
     private boolean tableIsAvailable;
 
     @Column(name = "start_time")
@@ -29,4 +30,7 @@ public class Reservation {
     @Column(name = "person_count")
     private int personCount;
 
+    @ManyToOne
+    @JoinColumn(name = "table_id")
+    private RestaurantTable restaurantTable;
 }
