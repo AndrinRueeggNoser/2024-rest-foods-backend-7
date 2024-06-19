@@ -19,6 +19,7 @@ public class ReservationService {
     public Reservation getByID(int reservationId) throws InstanceNotFoundException {
         return reservationRepository.findById(reservationId).orElseThrow(() -> new InstanceNotFoundException("Reservation with id " + reservationId + " could not be found."));
     }
+
     /**
      * When selected table is already reserved, exception should be thrown.
      * If restaurant is full (no reservations available), exception should be thrown.
@@ -48,5 +49,4 @@ public class ReservationService {
         }
         reservationRepository.deleteById(reservationId);
     }
-
 }

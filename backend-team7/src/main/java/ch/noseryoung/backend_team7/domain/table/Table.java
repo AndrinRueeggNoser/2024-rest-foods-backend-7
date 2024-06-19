@@ -10,7 +10,6 @@ import lombok.Setter;
 @jakarta.persistence.Table(name = "table")
 public class Table {
 
-
     @Id
     @Column(name = "table_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +17,5 @@ public class Table {
 
     @Column(name = "amount_of_seats")
     private int seats;
-
 }
 

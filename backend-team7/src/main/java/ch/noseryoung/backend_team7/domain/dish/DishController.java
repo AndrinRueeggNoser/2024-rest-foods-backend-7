@@ -22,9 +22,9 @@ public class DishController {
         return dishService.getAllDishes();
     }
 
-    @GetMapping("/{Id}")
-    public ResponseEntity<Dish> getById(@PathVariable("Id") int id) {
-        return ResponseEntity.ok().body(dishService.getById(id));
+    @GetMapping("/{dishId}")
+    public ResponseEntity<Dish> getById(@PathVariable("dishId") int dishId) {
+        return ResponseEntity.ok().body(dishService.getById(dishId));
     }
 
     @PostMapping
@@ -38,10 +38,10 @@ public class DishController {
         return dishService.updateById(dishId, dish);
     }
 
-    @DeleteMapping("{Id}")
-    public String deleteRank(@PathVariable("Id") int id) {
-        dishService.deleteDish(id);
-        return "Dish with id " + id + " was successfully deleted.";
+    @DeleteMapping("{dishId}")
+    public String deleteRank(@PathVariable("dishId") int dishId) {
+        dishService.deleteDish(dishId);
+        return "Dish with id " + dishId + " was successfully deleted.";
     }
 
     @ExceptionHandler(NoSuchElementException.class)
