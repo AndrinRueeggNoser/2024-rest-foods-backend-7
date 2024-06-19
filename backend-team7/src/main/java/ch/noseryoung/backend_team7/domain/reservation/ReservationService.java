@@ -37,7 +37,7 @@ public class ReservationService {
          * When selected table is already reserved, exception should be thrown.
          * If restaurant is full (no reservations available), exception should be thrown.
          * If reservation time is too early or too late, exception should be thrown.
-         * */
+         **/
         reservation.setReservationId(reservationId);
         return reservationRepository.save(reservation);
     }

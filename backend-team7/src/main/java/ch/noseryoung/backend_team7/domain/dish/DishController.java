@@ -16,6 +16,7 @@ public class DishController {
     DishService dishService;
 
     // Implement Swagger! @Operation
+
     @GetMapping
     public List<Dish> getAllDishes() {
         return dishService.getAllDishes();
