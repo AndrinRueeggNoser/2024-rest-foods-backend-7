@@ -24,6 +24,9 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "password")
     private String password;
 
@@ -31,5 +34,4 @@ public class User {
     @JoinColumn(name = "id_role", referencedColumnName = "role_id")
 
     private Role userRole;
-
 }

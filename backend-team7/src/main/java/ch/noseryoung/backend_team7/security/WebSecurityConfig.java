@@ -1,5 +1,4 @@
 package ch.noseryoung.backend_team7.security;
-
 import ch.noseryoung.backend_team7.domain.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,10 +35,12 @@ public class WebSecurityConfig {
         return new ProviderManager(provider);
     }
 
+    //DOING
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(
                         requests -> requests.requestMatchers(HttpMethod.GET, "/v3/api-docs", "/v3/api-docs/swagger-config", "/swagger-ui/*").permitAll().anyRequest().authenticated()
+                                .requestMatchers(HttpMethod)
 
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

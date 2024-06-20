@@ -32,6 +32,6 @@ VALUES (1, 1),
        (1, 2);
 
 -- USER
-INSERT INTO users (first_name, last_name, phone_number, password, id_role)
-VALUES ('ADMIN', 'ADMIN', '1234567890', '1234', 1),
-       ('USER', 'USER', '0987654321', '1234', 2);
+INSERT INTO users (first_name, last_name, phone_number, email, password, id_role)
+VALUES ('ADMIN', 'ADMIN', '1234567890', 'aaaa@aaa', '1234', 1),
+       ('USER', 'USER', '0987654321', 'aaaa@aaa', '1234', 2);
