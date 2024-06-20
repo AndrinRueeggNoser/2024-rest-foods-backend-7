@@ -11,17 +11,17 @@ import javax.management.InstanceNotFoundException;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/reservation")
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    @GetMapping("/reservations")
+    @GetMapping
     public List<Reservation> getAll() {
         return reservationService.getAllReservations();
     }
 
-    @GetMapping("/reservation/{reservationId}")
+    @GetMapping("/{reservationId}")
     public ResponseEntity<Reservation> getById(@PathVariable("reservationId") int reservationId) throws InstanceNotFoundException {
         return ResponseEntity.ok().body(reservationService.getByID(reservationId));
     }
@@ -32,12 +32,12 @@ public class ReservationController {
         return reservationService.addReservation(newReservation);
     }
 
-    @PutMapping(value = "/reservation/{reservationId}")
+    @PutMapping(value = "/{reservationId}")
     public Reservation updateReservation(@PathVariable("reservationId") int reservationId, @RequestBody Reservation reservation) throws InstanceNotFoundException, InstanceAlreadyExistsException {
         return reservationService.updateReservation(reservation, reservationId);
     }
 
-    @DeleteMapping("reservation/{reservationId}")
+    @DeleteMapping("/{reservationId}")
     public String deleteRank(@PathVariable("reservationId") int reservationId) throws InstanceNotFoundException {
         reservationService.deleteReservation(reservationId);
         return "Reservation with id " + reservationId + " was successfully deleted.";
