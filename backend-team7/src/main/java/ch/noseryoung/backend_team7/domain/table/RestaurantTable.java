@@ -21,6 +21,11 @@ public class RestaurantTable {
     @Column(name = "amount_of_seats")
     private int seats;
 
+    @Column(name = "is_available")
+    private boolean isAvailable;
+
     @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.LAZY)
     private Set<Reservation> reservations;
+
+
 }
