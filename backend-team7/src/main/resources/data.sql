@@ -4,11 +4,18 @@ VALUES ('Pizza', 'Italian speciality', 'https://www.pizza.png', FALSE, 'Italy', 
        ('Sushi', 'Japanese speciality', 'https://www.sushi.png', TRUE, 'Japan', 20.00),
        ('Taco', 'Mexican speciality', 'https://www.taco.png', FALSE, 'Mexico', 8.50);
 
+-- RESTAURANT TABLE
+INSERT INTO restaurant_table (table_id, amount_of_seats, is_available)
+VALUES (1, 6, TRUE),
+       (2, 4, TRUE),
+       (3, 10, FALSE);
+
+
 -- RESERVATION
-INSERT INTO reservation (table_no, table_is_available, start_time, end_time, person_count)
-VALUES (1, TRUE, 1800, 2000, 4),
-       (2, FALSE, 1900, 2100, 2),
-       (3, TRUE, 2000, 2200, 6);
+INSERT INTO reservation (reservation_id, start_time, end_time, person_count)
+VALUES (1, 1800, 2000, 4),
+       (2, 1900, 2100, 2),
+       (3, 2000, 2200, 6);
 
 -- ROLES
 INSERT INTO role(role_id, role_name)
@@ -34,4 +41,4 @@ VALUES (1, 1),
 -- USER
 INSERT INTO users (first_name, last_name, phone_number, email, password, id_role)
 VALUES ('ADMIN', 'ADMIN', '1234567890', 'aaaa@aaa', '1234', 1),
-       ('USER', 'USER', '0987654321', 'aaaa@aaa', '1234', 2);
+       ('USER', 'USER', '0987654321', 'aaa@aaa', '1234', 2);
