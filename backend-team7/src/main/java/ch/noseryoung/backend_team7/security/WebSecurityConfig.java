@@ -1,4 +1,5 @@
 package ch.noseryoung.backend_team7.security;
+
 import ch.noseryoung.backend_team7.domain.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -39,10 +42,16 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(
-                        requests -> requests.requestMatchers(HttpMethod.GET, "/v3/api-docs", "/v3/api-docs/swagger-config", "/swagger-ui/*").permitAll().anyRequest().authenticated()
-                                .requestMatchers(HttpMethod)
+                requests -> requests.requestMatchers(HttpMethod.GET, "/v3/api-docs", "/v3/api-docs/swagger-config", "/swagger-ui/*").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login") // JWT-Input: Expose login endpoint
+                        .permitAll()
+                        .anyRequest().authenticated())
+                // JWT-Input: Adds JWT Authentication Filter, must have same endpoint as exposed endpoint for login
+                .addFilterAfter(new JWTAuthenticationFilter(authenticationManager(), new AntPathRequestMatcher("/login", "POST")), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new JWTAuthorizationFilter(userService),
+                        UsernamePasswordAuthenticationFilter.class)
 
-                )
+
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)

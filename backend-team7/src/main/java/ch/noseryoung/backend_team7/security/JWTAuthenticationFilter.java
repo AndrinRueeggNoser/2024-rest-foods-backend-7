@@ -48,6 +48,7 @@ class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
      */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) {
+        System.out.println("Attempting login");
         try {
             User credentials = new ObjectMapper().readValue(req.getInputStream(), User.class);
             return getAuthenticationManager().authenticate(
@@ -73,6 +74,7 @@ class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
                                             Authentication auth) throws IOException {
         // JWT-Input: Adds the UserDetailsImpl logic to the authenticated user
+        System.out.println("Successful login");
         UserService.UserDetailsImpl userDetailsImpl = (UserService.UserDetailsImpl) auth.getPrincipal();
         User user = userDetailsImpl.user();
         Integer subject = user.getUserId();
@@ -112,6 +114,7 @@ class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                               AuthenticationException failed) {
+        System.out.println("Login incorrect");
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
     }
 

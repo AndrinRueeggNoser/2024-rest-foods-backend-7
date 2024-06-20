@@ -15,8 +15,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationId;
 
-    @Column(name = "table_no")
-    private int tableNo;
+    @OneToOne
+    @JoinColumn(name = "id_table", referencedColumnName = "table_id")
+    private RestaurantTable restaurantTable;
 
     @Column(name = "start_time")
     private int startTime;
@@ -27,7 +28,5 @@ public class Reservation {
     @Column(name = "person_count")
     private int personCount;
 
-    @OneToOne
-    @JoinColumn(name = "table_id")
-    private RestaurantTable restaurantTable;
+
 }

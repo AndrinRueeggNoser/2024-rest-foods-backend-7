@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -17,9 +18,9 @@ public class UserService implements UserDetailsService {
     private UserRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
-        return repository.findByFirstName(firstName).map(UserDetailsImpl::new)
-                .orElseThrow(() -> new UsernameNotFoundException(firstName));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return repository.findByEmail(email).map(UserDetailsImpl::new)
+                .orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
     public record UserDetailsImpl(User user) implements UserDetails {
@@ -60,5 +61,7 @@ public class UserService implements UserDetailsService {
             return true;
         }
     }
-    public void findById
+    public User findById(Integer id) {
+        return repository.findById(id).orElseThrow(NoSuchElementException::new);
+    }
 }
