@@ -15,7 +15,6 @@ public class RestaurantTable {
 
     @Id
     @Column(name = "table_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tableId;
 
     @Column(name = "amount_of_seats")
@@ -24,8 +23,9 @@ public class RestaurantTable {
     @Column(name = "is_available")
     private boolean isAvailable;
 
-    @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.LAZY)
-    private Set<Reservation> reservations;
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
 
 
 }

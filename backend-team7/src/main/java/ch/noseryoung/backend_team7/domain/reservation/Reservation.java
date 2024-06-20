@@ -18,9 +18,6 @@ public class Reservation {
     @Column(name = "table_no")
     private int tableNo;
 
-    @Column(name = "table_is_available")
-    private boolean tableIsAvailable;
-
     @Column(name = "start_time")
     private int startTime;
 
@@ -30,7 +27,7 @@ public class Reservation {
     @Column(name = "person_count")
     private int personCount;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "table_id")
     private RestaurantTable restaurantTable;
 }
