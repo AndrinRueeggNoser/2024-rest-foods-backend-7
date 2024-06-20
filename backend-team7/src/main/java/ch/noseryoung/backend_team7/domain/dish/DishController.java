@@ -41,7 +41,7 @@ public class DishController {
     }
 
     @DeleteMapping("{dishId}")
-    public String deleteRank(@PathVariable("dishId") int dishId) throws InstanceNotFoundException {
+    public String deleteDish(@PathVariable("dishId") int dishId) throws InstanceNotFoundException {
         dishService.deleteDish(dishId);
         return "Dish with id " + dishId + " was successfully deleted.";
     }
