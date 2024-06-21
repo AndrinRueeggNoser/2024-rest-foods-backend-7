@@ -40,6 +40,36 @@ dependencies {
 
 }
 
+// JWT-Input: method for reading .env-files if it exists with specific name
+def readEnvironmentFileIfExists(String envFilename) {
+	def envVars = [:]
+	def envFile = file(envFilename)
+	if (envFile.exists()) {
+		envFile.readLines().each {
+			if (it != "" && it.charAt(0) != (char) '#') {
+				def (key, value) = it.tokenize("=")
+				key = key.toString()
+				value = value.toString()
+				if (System.getenv(key) == null) {
+					envVars[key] = value
+				}
+			}
+		}
+	}
+
+	return envVars
+}
+
+// JWT-Input: task in gradle for writing values from .env file into environment variables
+tasks.withType(JavaExec) { javaExec ->
+	doFirst {
+		def envVars = readEnvironmentFileIfExists(".env")
+		for (envVar in envVars) {
+			environment(envVar.key, envVar.value)
+		}
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

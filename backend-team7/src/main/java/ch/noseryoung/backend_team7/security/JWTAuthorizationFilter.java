@@ -2,7 +2,9 @@ package ch.noseryoung.backend_team7.security;
 import ch.noseryoung.backend_team7.domain.user.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+
 import java.io.IOException;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,8 +22,11 @@ class JWTAuthorizationFilter extends OncePerRequestFilter {
 
     private final UserService userService;
 
-    JWTAuthorizationFilter(UserService userService) {
+    private final JWTProperties jwtProperties;
+
+    JWTAuthorizationFilter(UserService userService, JWTProperties jwtProperties) {
         this.userService = userService;
+        this.jwtProperties = jwtProperties;
     }
 
     /**
@@ -36,9 +41,9 @@ class JWTAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws IOException, ServletException {
-        String authorizationHeader = req.getHeader(JWTAuthenticationFilter.HEADER_STRING);
-        if (authorizationHeader != null && authorizationHeader.startsWith(JWTAuthenticationFilter.PREFIX)) {
-            String token = authorizationHeader.replace(JWTAuthenticationFilter.PREFIX + " ", "");
+        String authorizationHeader = req.getHeader(jwtProperties.getHeaderString());
+        if (authorizationHeader != null && authorizationHeader.startsWith(jwtProperties.getTokenPrefix())) {
+            String token = authorizationHeader.replace(jwtProperties.getTokenPrefix() + " ", "");
             SecurityContextHolder.getContext().setAuthentication(getAuthentication(token));
         }
         chain.doFilter(req, res);
@@ -47,7 +52,7 @@ class JWTAuthorizationFilter extends OncePerRequestFilter {
     private Authentication getAuthentication(String token) {
 
         // Remove the prefix from the authorization header value to return only the JWT.
-        Claims claims = Jwts.parser().setSigningKey(JWTAuthenticationFilter.SECRET.getBytes()).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(jwtProperties.getSecret().getBytes()).parseClaimsJws(token).getBody();
         // Check if the token is blacklisted, if so, throw an exception
         UserService.UserDetailsImpl userDetails = new UserService.UserDetailsImpl(userService.findById(Integer.parseInt(claims.getSubject())));
         return new UsernamePasswordAuthenticationToken(userDetails, token, userDetails.getAuthorities());

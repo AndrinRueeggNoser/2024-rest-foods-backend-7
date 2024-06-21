@@ -30,6 +30,9 @@ public class WebSecurityConfig {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    JWTProperties jwtProperties;
+
     @Bean
     public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -47,8 +50,8 @@ public class WebSecurityConfig {
                         .permitAll()
                         .anyRequest().authenticated())
                 // JWT-Input: Adds JWT Authentication Filter, must have same endpoint as exposed endpoint for login
-                .addFilterAfter(new JWTAuthenticationFilter(authenticationManager(), new AntPathRequestMatcher("/login", "POST")), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(new JWTAuthorizationFilter(userService),
+                .addFilterAfter(new JWTAuthenticationFilter(authenticationManager(), new AntPathRequestMatcher("/login", "POST"), jwtProperties), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new JWTAuthorizationFilter(userService, jwtProperties),
                         UsernamePasswordAuthenticationFilter.class)
 
 
