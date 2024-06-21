@@ -1,8 +1,8 @@
 -- DISH
 INSERT INTO dish (dish_name, description, image, is_chefs_choice, region, price)
-VALUES ('Pizza', 'Italian speciality', 'https://www.pizza.png', FALSE, 'Italy', 12),
-       ('Sushi', 'Japanese speciality', 'https://www.sushi.png', TRUE, 'Japan', 20.00),
-       ('Taco', 'Mexican speciality', 'https://www.taco.png', FALSE, 'Mexico', 8.50);
+VALUES ('Pizza', 'Italian speciality', 'https://img.zeit.de/zeit-magazin/wochenmarkt/2023-08/pizza-margherita-giovanni-stincone-rezept/square__960x960', FALSE, 'Italy', 12),
+       ('Sushi', 'Japanese speciality', 'https://www.einfachkochen.de/sites/einfachkochen.de/files/styles/full_width_tablet_4_3/public/2022-12/2022_sake-maki-sushi_aufmacher.jpg?h=4521fff0&itok=omM42IC2', TRUE, 'Japan', 20.00),
+       ('Taco', 'Mexican speciality', 'https://www.thespruceeats.com/thmb/ereeBcFkDEbDT2VSlDe34sqXO_8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/chicken-tinga-tinga-de-pollo-4773239-Hero_01-1bd1d960c02a4fdb812323b8c60fd55b.jpg', FALSE, 'Mexico', 8.50);
 
 -- RESTAURANT TABLE
 INSERT INTO restaurant_table (table_id, amount_of_seats, is_available)
