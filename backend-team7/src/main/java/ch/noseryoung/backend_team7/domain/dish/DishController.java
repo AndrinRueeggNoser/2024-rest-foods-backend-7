@@ -24,6 +24,12 @@ public class DishController {
         return dishService.getAllDishes();
     }
 
+    /**
+     * Gets a single dish by its id
+     * @param dishId Get object to get a dish by id
+     * @return Status code 200
+     * @throws InstanceNotFoundException
+     */
     @GetMapping("/{dishId}")
     public ResponseEntity<Dish> getById(@PathVariable("dishId") int dishId) throws InstanceNotFoundException {
         return ResponseEntity.ok().body(dishService.getById(dishId));
