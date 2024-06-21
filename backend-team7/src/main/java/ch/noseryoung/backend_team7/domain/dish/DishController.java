@@ -36,14 +36,13 @@ public class DishController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Dish createDish(@RequestBody Dish newDish) throws InstanceAlreadyExistsException {
-        return dishService.addDish(newDish);
+    public ResponseEntity<Dish> createDish(@RequestBody Dish newDish) throws InstanceAlreadyExistsException {
+        return ResponseEntity.status(201).body(dishService.addDish(newDish));
     }
 
     @PutMapping(value = "/{dishId}")
-    public Dish updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish) throws InstanceNotFoundException {
-        return dishService.updateById(dishId, dish);
+    public ResponseEntity<Dish> updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish) throws InstanceNotFoundException {
+        return ResponseEntity.status(200).body(dishService.updateById(dishId, dish));
     }
 
     @DeleteMapping("{dishId}")
@@ -52,9 +51,13 @@ public class DishController {
         return "Dish with id " + dishId + " was successfully deleted.";
     }
 
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException nsee) {
-        return ResponseEntity.status(404).body(nsee.getMessage());
+    @ExceptionHandler(InstanceNotFoundException.class)
+    public ResponseEntity<String> instanceNotFoundException(InstanceNotFoundException infe) {
+        return ResponseEntity.status(404).body(infe.getMessage());
     }
 
+    @ExceptionHandler(InstanceAlreadyExistsException.class)
+    public ResponseEntity<String> instanceAlreadyExistException(InstanceAlreadyExistsException iaee) {
+        return ResponseEntity.status(404).body(iaee.getMessage());
+    }
 }
