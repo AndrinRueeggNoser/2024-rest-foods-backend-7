@@ -23,10 +23,6 @@ public class RestaurantTable {
     @Column(name = "is_available")
     private boolean isAvailable;
 
-/*
-    @OneToOne(cascade = CascadeType.ALL, optional = true)
-    @JoinColumn(name = "id_reservation", referencedColumnName = "reservation_id")
+    @OneToOne(mappedBy = "restaurant_table", cascade = CascadeType.ALL, optional = true)
     private Reservation reservation;
-*/
-
 }
