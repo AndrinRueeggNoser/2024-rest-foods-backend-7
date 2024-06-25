@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/dish")
 public class DishController {
     @Autowired
@@ -19,22 +20,33 @@ public class DishController {
 
     // Implement Swagger! @Operation
 
+<<<<<<< Updated upstream
     /**
      * Gets all dishes
      * @return A list of all dishes
      */
+=======
+
+>>>>>>> Stashed changes
     @GetMapping
+
     public List<Dish> getAllDishes() {
         return dishService.getAllDishes();
     }
 
     /**
      * Gets a single dish by its id
+<<<<<<< Updated upstream
      * @param dishId The id of the dish to get
+=======
+     *
+     * @param dishId Get object to get a dish by id
+>>>>>>> Stashed changes
      * @return Status code 200
      * @throws InstanceNotFoundException if the dish with the specified id is not found
      */
     @GetMapping("/{dishId}")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Dish> getById(@PathVariable("dishId") int dishId) throws InstanceNotFoundException {
         return ResponseEntity.ok().body(dishService.getById(dishId));
     }
@@ -46,6 +58,7 @@ public class DishController {
      * @throws InstanceAlreadyExistsException if a dish with the same id already exists
      */
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Dish> createDish(@RequestBody Dish newDish) throws InstanceAlreadyExistsException {
         return ResponseEntity.status(201).body(dishService.addDish(newDish));
     }
@@ -59,7 +72,12 @@ public class DishController {
      * @throws InstanceAlreadyExistsException if a dish with the same id already exists
      */
     @PutMapping(value = "/{dishId}")
+<<<<<<< Updated upstream
     public ResponseEntity<Dish> updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish) throws InstanceNotFoundException, InstanceAlreadyExistsException {
+=======
+    @CrossOrigin(origins = "http://localhost:5173")
+    public ResponseEntity<Dish> updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish) throws InstanceNotFoundException {
+>>>>>>> Stashed changes
         return ResponseEntity.status(200).body(dishService.updateById(dishId, dish));
     }
 
@@ -70,6 +88,8 @@ public class DishController {
      * @throws InstanceNotFoundException if the dish with the specified id is not found
      */
     @DeleteMapping("{dishId}")
+    @CrossOrigin(origins = "http://localhost:5173")
+
     public String deleteDish(@PathVariable("dishId") int dishId) throws InstanceNotFoundException {
         dishService.deleteDish(dishId);
         return "Dish with id " + dishId + " was successfully deleted.";
