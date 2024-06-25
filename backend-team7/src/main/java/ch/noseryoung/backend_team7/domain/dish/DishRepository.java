@@ -5,5 +5,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DishRepository extends JpaRepository<Dish, Integer> {
-    Dish findByName(String dishName);
 }

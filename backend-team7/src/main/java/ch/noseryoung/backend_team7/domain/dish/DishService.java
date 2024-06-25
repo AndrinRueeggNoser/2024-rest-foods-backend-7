@@ -27,19 +27,16 @@ public class DishService {
     }
 
     public Dish addDish(Dish newDish) throws InstanceAlreadyExistsException {
-        Dish existingDish = dishRepository.findByName(newDish.getDishName());
-        if (existingDish != null) {
-            throw new InstanceAlreadyExistsException("A dish like this already exists. Please check the other dishes!");
+        if (dishRepository.existsById(newDish.getDishId())) {
+            throw new InstanceAlreadyExistsException("Dish with id " + newDish.getDishId() + " already exists.");
         }
         return dishRepository.save(newDish);
     }
 
-    public Dish updateById(int dishId, Dish dish) throws InstanceNotFoundException, InstanceAlreadyExistsException {
-        Dish existingDish = dishRepository.findByName(dish.getDishName());
+    public Dish updateById(int dishId, Dish dish) throws InstanceNotFoundException {
+
         if (!dishRepository.existsById(dishId)) {
             throw new InstanceNotFoundException("Dish with id " + dishId + " could not be found.");
-        } else if (existingDish != null) {
-            throw new InstanceAlreadyExistsException("A dish like this already exists. Please check the other dishes!");
         }
         dish.setDishId(dishId);
         return dishRepository.save(dish);
