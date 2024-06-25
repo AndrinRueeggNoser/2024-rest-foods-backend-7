@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.management.InstanceAlreadyExistsException;
@@ -29,6 +30,7 @@ public class ReservationController {
      *
      * @return A list of all reservations
      */
+    @PreAuthorize("hasAuthority('GET')")
     @GetMapping
     @Operation(summary = "Get all reservations", description = "Displays a list of all reservations along with their id, restaurant table, start time, end time, person count and returns a JSON with the status code 200.")
     public List<Reservation> getAll() {
@@ -42,6 +44,7 @@ public class ReservationController {
      * @return Status code 200
      * @throws InstanceNotFoundException if the reservation with the specified id is not found
      */
+    @PreAuthorize("hasAuthority('GET')")
     @GetMapping("/{reservationId}")
     @Operation(summary = "Get reservation by ID", description = "Retrieves a reservations information by its id and returns a JSON object with the status code 200.")
     public ResponseEntity<Reservation> getById(@PathVariable("reservationId") int reservationId) throws InstanceNotFoundException {
@@ -54,6 +57,7 @@ public class ReservationController {
      * @param newReservation The reservation object to create
      * @return Status code 201
      */
+    @PreAuthorize("hasAuthority('POST')")
     @PostMapping
     @Operation(summary = "Create a new reservation", description = "Adds a new reservation with its information and returns a JSON object with the status code 201.")
     @ResponseStatus(HttpStatus.CREATED)
@@ -70,6 +74,7 @@ public class ReservationController {
      * @throws InstanceNotFoundException      if the reservation with the specified id is not found
      * @throws InstanceAlreadyExistsException if a reservation like this already exists
      */
+    @PreAuthorize("hasAuthority('PUT')")
     @PutMapping(value = "/{reservationId}")
     @Operation(summary = "Update a reservation", description = "Updates the information of an existing reservation and returns a JSON object with the status code 200.")
     public ResponseEntity<Reservation> updateReservation(@PathVariable("reservationId") int reservationId, @RequestBody Reservation reservation) throws InstanceNotFoundException, InstanceAlreadyExistsException {
@@ -83,6 +88,7 @@ public class ReservationController {
      * @return "Success" message for deleting a reservation
      * @throws InstanceNotFoundException if the reservation with the specified id is not found
      */
+    @PreAuthorize("hasAuthority('DELETE')")
     @DeleteMapping("/{reservationId}")
     @Operation(summary = "Delete a reservation", description = "Removes a reservation using its id and returns a message with the status code 200.")
     public String deleteDish(@PathVariable("reservationId") int reservationId) throws InstanceNotFoundException {

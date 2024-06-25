@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.management.InstanceAlreadyExistsException;
@@ -51,6 +52,7 @@ public class DishController {
      * @throws InstanceAlreadyExistsException if a dish with the same id already exists
      */
     @PostMapping
+    @PreAuthorize("hasAuthority('POST')")
     @Operation(summary = "Create a new dish", description = "Adds a new dish with its information and returns a JSON object with the status code 201.")
     public ResponseEntity<Dish> createDish(@RequestBody Dish newDish) throws InstanceAlreadyExistsException {
         return ResponseEntity.status(201).body(dishService.addDish(newDish));
@@ -66,6 +68,7 @@ public class DishController {
      * @throws InstanceAlreadyExistsException if a dish with the same id already exists
      */
     @PutMapping(value = "/{dishId}")
+    @PreAuthorize("hasAuthority('PUT')")
     @Operation(summary = "Update a dish", description = "Updates the information of an existing dish and returns a JSON object with the status code 200.")
     public ResponseEntity<Dish> updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish) throws InstanceNotFoundException, InstanceAlreadyExistsException {
         return ResponseEntity.status(200).body(dishService.updateById(dishId, dish));
@@ -80,6 +83,7 @@ public class DishController {
      * @throws InstanceNotFoundException if the dish with the specified id is not found
      */
     @DeleteMapping("{dishId}")
+    @PreAuthorize("hasAuthority('DELETE')")
     @Operation(summary = "Delete a dish", description = "Removes a dish using its id and returns a message with the status code 200.")
     public String deleteDish(@PathVariable("dishId") int dishId) throws InstanceNotFoundException {
         dishService.deleteDish(dishId);
