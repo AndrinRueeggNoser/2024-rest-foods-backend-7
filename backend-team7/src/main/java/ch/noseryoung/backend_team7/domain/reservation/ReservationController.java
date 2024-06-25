@@ -18,41 +18,81 @@ import java.util.List;
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
+
     @Autowired
     private ReservationService reservationService;
 
+    /**
+     * Gets all reservations
+     * @return A list of all reservations
+     */
     @GetMapping
     public List<Reservation> getAll() {
         return reservationService.getAllReservations();
     }
 
+    /**
+     * Gets a single reservation by its id
+     * @param reservationId The id of the reservation to get
+     * @return Status code 200
+     * @throws InstanceNotFoundException if the reservation with the specified id is not found
+     */
     @GetMapping("/{reservationId}")
     public ResponseEntity<Reservation> getById(@PathVariable("reservationId") int reservationId) throws InstanceNotFoundException {
         return ResponseEntity.ok().body(reservationService.getByID(reservationId));
     }
 
+    /**
+     * Creates a new reservation
+     * @param newReservation The reservation object to create
+     * @return Status code 201
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation newReservation) {
         return ResponseEntity.status(201).body(reservationService.addReservation(newReservation));
     }
 
+    /**
+     * Updates an existing reservation
+     * @param reservationId The id of the reservation to update
+     * @param reservation Updated reservation data
+     * @return Status code 200
+     * @throws InstanceNotFoundException if the reservation with the specified id is not found
+     * @throws InstanceAlreadyExistsException if a reservation like this already exists
+     */
     @PutMapping(value = "/{reservationId}")
     public ResponseEntity<Reservation> updateReservation(@PathVariable("reservationId") int reservationId, @RequestBody Reservation reservation) throws InstanceNotFoundException, InstanceAlreadyExistsException {
         return ResponseEntity.status(200).body(reservationService.updateReservation(reservation, reservationId));
     }
 
+    /**
+     * Deletes a reservation by its id
+     * @param reservationId Used to delete a certain reservation
+     * @return "Success" message for deleting a reservation
+     * @throws InstanceNotFoundException if the reservation with the specified id is not found
+     */
     @DeleteMapping("/{reservationId}")
     public String deleteRank(@PathVariable("reservationId") int reservationId) throws InstanceNotFoundException {
         reservationService.deleteReservation(reservationId);
         return "Reservation with id " + reservationId + " was successfully deleted.";
     }
 
+    /**
+     * Handles InstanceNotFoundException
+     * @param infe The exception to handle
+     * @return Status code 404 and error message
+     */
     @ExceptionHandler(InstanceNotFoundException.class)
     public ResponseEntity<String> instanceNotFoundException(InstanceNotFoundException infe) {
         return ResponseEntity.status(404).body(infe.getMessage());
     }
 
+    /**
+     * Handles InstanceAlreadyExistsException
+     * @param iaee The exception to handle
+     * @return Status code 404 and error message
+     */
     @ExceptionHandler(InstanceAlreadyExistsException.class)
     public ResponseEntity<String> instanceAlreadyExistException(InstanceAlreadyExistsException iaee) {
         return ResponseEntity.status(404).body(iaee.getMessage());
