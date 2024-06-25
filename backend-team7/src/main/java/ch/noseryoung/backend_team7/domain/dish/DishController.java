@@ -2,6 +2,7 @@ package ch.noseryoung.backend_team7.domain.dish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.management.InstanceAlreadyExistsException;
 import javax.management.InstanceNotFoundException;
@@ -44,6 +45,7 @@ public class DishController {
      * @throws InstanceAlreadyExistsException if a dish with the same id already exists
      */
     @PostMapping
+    @PreAuthorize("hasAuthority('POST')")
     public ResponseEntity<Dish> createDish(@RequestBody Dish newDish) throws InstanceAlreadyExistsException {
         return ResponseEntity.status(201).body(dishService.addDish(newDish));
     }
@@ -58,6 +60,7 @@ public class DishController {
      * @throws InstanceAlreadyExistsException if a dish with the same id already exists
      */
     @PutMapping(value = "/{dishId}")
+    @PreAuthorize("hasAuthority('PUT')")
     public ResponseEntity<Dish> updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish) throws InstanceNotFoundException, InstanceAlreadyExistsException {
         return ResponseEntity.status(200).body(dishService.updateById(dishId, dish));
     }
@@ -71,6 +74,7 @@ public class DishController {
      * @throws InstanceNotFoundException if the dish with the specified id is not found
      */
     @DeleteMapping("{dishId}")
+    @PreAuthorize("hasAuthority('DELETE')")
     public String deleteDish(@PathVariable("dishId") int dishId) throws InstanceNotFoundException {
         dishService.deleteDish(dishId);
         return "Dish with id " + dishId + " was successfully deleted.";

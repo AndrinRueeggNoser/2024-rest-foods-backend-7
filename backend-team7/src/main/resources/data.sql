@@ -42,3 +42,5 @@ VALUES (1, 1),
 INSERT INTO users (first_name, last_name, phone_number, email, password, id_role)
 VALUES ('ADMIN', 'ADMIN', '1234567890', 'admin@admin.com', '1234', 1),
        ('USER', 'USER', '0987654321', 'user@user.dom', '1234', 2);
+
+

@@ -1,5 +1,6 @@
 package ch.noseryoung.backend_team7.domain.user;
 
+import ch.noseryoung.backend_team7.domain.dish.Dish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -16,6 +18,10 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository repository;
+
+    public List<User> getAllUsers() {
+        return repository.findAll();
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

@@ -4,6 +4,7 @@ import ch.noseryoung.backend_team7.domain.dish.Dish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.management.InstanceAlreadyExistsException;
@@ -26,6 +27,7 @@ public class ReservationController {
      * Gets all reservations
      * @return A list of all reservations
      */
+    @PreAuthorize("hasAuthority('GET')")
     @GetMapping
     public List<Reservation> getAll() {
         return reservationService.getAllReservations();
@@ -37,6 +39,7 @@ public class ReservationController {
      * @return Status code 200
      * @throws InstanceNotFoundException if the reservation with the specified id is not found
      */
+    @PreAuthorize("hasAuthority('GET')")
     @GetMapping("/{reservationId}")
     public ResponseEntity<Reservation> getById(@PathVariable("reservationId") int reservationId) throws InstanceNotFoundException {
         return ResponseEntity.ok().body(reservationService.getByID(reservationId));
@@ -47,6 +50,7 @@ public class ReservationController {
      * @param newReservation The reservation object to create
      * @return Status code 201
      */
+    @PreAuthorize("hasAuthority('POST')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation newReservation) {
@@ -61,6 +65,7 @@ public class ReservationController {
      * @throws InstanceNotFoundException if the reservation with the specified id is not found
      * @throws InstanceAlreadyExistsException if a reservation like this already exists
      */
+    @PreAuthorize("hasAuthority('PUT')")
     @PutMapping(value = "/{reservationId}")
     public ResponseEntity<Reservation> updateReservation(@PathVariable("reservationId") int reservationId, @RequestBody Reservation reservation) throws InstanceNotFoundException, InstanceAlreadyExistsException {
         return ResponseEntity.status(200).body(reservationService.updateReservation(reservation, reservationId));
@@ -72,6 +77,7 @@ public class ReservationController {
      * @return "Success" message for deleting a reservation
      * @throws InstanceNotFoundException if the reservation with the specified id is not found
      */
+    @PreAuthorize("hasAuthority('DELETE')")
     @DeleteMapping("/{reservationId}")
     public String deleteRank(@PathVariable("reservationId") int reservationId) throws InstanceNotFoundException {
         reservationService.deleteReservation(reservationId);
