@@ -30,7 +30,6 @@ public class DishController {
 
     /**
      * Gets a single dish by its id
-     *
      * @param dishId The id of the dish to get
      * @return Status code 200
      * @throws InstanceNotFoundException if the dish with the specified id is not found
@@ -57,9 +56,10 @@ public class DishController {
      * @param dish Updated dish data
      * @return Status code 200
      * @throws InstanceNotFoundException if the dish with the specified id is not found
+     * @throws InstanceAlreadyExistsException if a dish with the same id already exists
      */
     @PutMapping(value = "/{dishId}")
-    public ResponseEntity<Dish> updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish) throws InstanceNotFoundException {
+    public ResponseEntity<Dish> updateDish(@PathVariable("dishId") int dishId, @RequestBody Dish dish) throws InstanceNotFoundException, InstanceAlreadyExistsException {
         return ResponseEntity.status(200).body(dishService.updateById(dishId, dish));
     }
 
