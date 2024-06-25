@@ -28,7 +28,7 @@ public class ReservationService {
         return reservationRepository.save(newReservation);
     }
 
-    public Reservation updateReservation(Reservation reservation, int reservationId) throws InstanceNotFoundException, InstanceAlreadyExistsException {
+    public Reservation updateReservation(Reservation reservation, int reservationId) throws InstanceNotFoundException {
         if (!reservationRepository.existsById(reservationId)) {
             throw new InstanceNotFoundException("Reservation with id " + reservationId + " could not be found.");
         }
