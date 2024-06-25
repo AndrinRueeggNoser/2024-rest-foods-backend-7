@@ -21,7 +21,7 @@ public class DishController {
 
     /***
      * Gets all dishes
-     * @return A List of all dishes
+     * @return A list of all dishes
      */
     @GetMapping
     public List<Dish> getAllDishes() {
