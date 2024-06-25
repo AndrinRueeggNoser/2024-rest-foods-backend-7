@@ -19,7 +19,7 @@ public class DishController {
 
     // Implement Swagger! @Operation
 
-    /***
+    /**
      * Gets all dishes
      * @return A list of all dishes
      */
@@ -39,7 +39,7 @@ public class DishController {
         return ResponseEntity.ok().body(dishService.getById(dishId));
     }
 
-    /***
+    /**
      * Creates a new dish
      * @param newDish The dish object to create
      * @return Status code 201
@@ -50,7 +50,7 @@ public class DishController {
         return ResponseEntity.status(201).body(dishService.addDish(newDish));
     }
 
-    /***
+    /**
      * Updates an existing dish
      * @param dishId The id of the dish to update
      * @param dish Updated dish data
@@ -63,11 +63,11 @@ public class DishController {
         return ResponseEntity.status(200).body(dishService.updateById(dishId, dish));
     }
 
-    /***
+    /**
      * Deletes a dish by its id
      * @param dishId Used to delete a certain dish
      * @return "Success" message for deleting a dish
-     * @throws InstanceNotFoundException
+     * @throws InstanceNotFoundException if the dish with the specified id is not found
      */
     @DeleteMapping("{dishId}")
     public String deleteDish(@PathVariable("dishId") int dishId) throws InstanceNotFoundException {
@@ -75,7 +75,7 @@ public class DishController {
         return "Dish with id " + dishId + " was successfully deleted.";
     }
 
-    /***
+    /**
      * Handles InstanceNotFoundException
      * @param infe The exception to handle
      * @return Status Code 404 and error message
@@ -85,7 +85,7 @@ public class DishController {
         return ResponseEntity.status(404).body(infe.getMessage());
     }
 
-    /***
+    /**
      * Handles InstanceAlreadyExistsException
      * @param iaee The exception to handle
      * @return Status Code 404 and error message
