@@ -26,23 +26,17 @@ public class ReservationService {
         return reservationRepository.findById(reservationId).orElseThrow(() -> new InstanceNotFoundException("Reservation with id " + reservationId + " could not be found."));
     }
 
-    /**
-     * When selected table is already reserved, exception should be thrown.
-     * If reservation time is too early or too late, exception should be thrown.
-     **/
-    public Reservation addReservation(Reservation newReservation) throws TableAlreadyReservedException, InvalidReservationTimeException {
+    public Reservation addReservation(Reservation newReservation) throws TableAlreadyReservedException, InvalidReservationTimeException, InstanceNotFoundException {
+        validateReservation(newReservation);
         return reservationRepository.save(newReservation);
     }
 
-    public Reservation updateReservation(Reservation reservation, int reservationId) throws InstanceNotFoundException {
+    public Reservation updateReservation(Reservation reservation, int reservationId) throws TableAlreadyReservedException, InvalidReservationTimeException, InstanceNotFoundException {
+
         if (!reservationRepository.existsById(reservationId)) {
             throw new InstanceNotFoundException("Reservation with id " + reservationId + " could not be found.");
         }
-        /**
-         * IF UPDATED RESERVATION:
-         * When selected table is already reserved, exception should be thrown.
-         * If reservation time is too early or too late, exception should be thrown.
-         **/
+        validateReservation(reservation);
         reservation.setReservationId(reservationId);
         return reservationRepository.save(reservation);
     }
