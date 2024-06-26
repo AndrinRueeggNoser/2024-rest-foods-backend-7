@@ -30,7 +30,7 @@ public class Reservation {
     private int personCount;
 
     @OneToOne
-    @JoinColumn(name = "id_table", referencedColumnName = "table_id")
+    @JoinColumn(name = "table_id", referencedColumnName = "table_id")
 
     @NotNull(message = "Restaurant table cannot be empty")
     private RestaurantTable restaurantTable;
