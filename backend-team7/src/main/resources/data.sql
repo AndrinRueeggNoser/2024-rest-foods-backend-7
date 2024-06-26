@@ -17,10 +17,10 @@ VALUES (1, 6, TRUE),
 
 
 -- RESERVATION
-INSERT INTO reservation (reservation_id, start_time, end_time, person_count)
-VALUES (1, 1800, 2000, 4),
-       (2, 1900, 2100, 2),
-       (3, 2000, 2200, 6);
+INSERT INTO reservation (reservation_id, reservation_time, person_count)
+VALUES (1, '2024-06-26 13:00:00', 4),
+       (2, '2024-06-26 15:00:00', 2),
+       (3, '2024-06-26 18:00:00', 6);
 
 -- ROLES
 INSERT INTO role(role_id, role_name)
