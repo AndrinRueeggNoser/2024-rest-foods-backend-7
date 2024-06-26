@@ -1,5 +1,6 @@
 package ch.noseryoung.backend_team7.domain.reservation;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
@@ -31,7 +32,7 @@ public class Reservation {
 
     @OneToOne
     @JoinColumn(name = "table_id", referencedColumnName = "table_id")
-
+    @JsonBackReference
     @NotNull(message = "Restaurant table cannot be empty")
     private RestaurantTable restaurantTable;
 }
