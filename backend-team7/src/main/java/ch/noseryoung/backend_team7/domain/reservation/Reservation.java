@@ -1,6 +1,5 @@
 package ch.noseryoung.backend_team7.domain.reservation;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
