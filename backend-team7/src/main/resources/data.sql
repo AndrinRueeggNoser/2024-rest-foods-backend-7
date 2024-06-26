@@ -28,13 +28,18 @@ VALUES ('Pizza', 'Italian speciality',
 INSERT INTO restaurant_table (table_id, amount_of_seats, is_available)
 VALUES (1, 6, TRUE),
        (2, 4, TRUE),
-       (3, 10, FALSE);
+       (3, 9, TRUE),
+       (4, 8, TRUE),
+       (5, 7, TRUE),
+       (6, 8, TRUE);
 
 -- RESERVATION
-INSERT INTO reservation (reservation_id, reservation_time, person_count, table_id)
-VALUES (1, '2024-06-26 13:00:00', 4, 1),
-       (2, '2024-06-26 15:00:00', 2, 2),
-       (3, '2024-06-26 18:00:00', 6, 3);
+INSERT INTO reservation (reservation_time, person_count, table_id)
+VALUES ( '2024-06-26 13:00:00', 4, 1),
+       ( '2024-06-26 15:00:00', 2, 2),
+       ( '2024-06-26 18:00:00', 6, 3),
+       ( '2024-06-26 16:00:00', 7, 4),
+       ( '2024-06-26 19:00:00', 8, 5);
 
 -- ROLES
 INSERT INTO role(role_id, role_name)
