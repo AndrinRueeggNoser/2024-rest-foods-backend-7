@@ -21,6 +21,12 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationId;
 
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(name = "reservation_time")
     @NotNull(message = "Reservation time cannot be empty")
     @Future(message = "Reservation time must be in the future")
